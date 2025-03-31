@@ -1,0 +1,96 @@
+.card {
+    background:red;
+    width:min(100%,21rem);
+    border-radius:5px;
+    box-shadow: 1px 4px black;
+    
+}
+
+
+.roboto-condensed {
+    font-family: "Roboto Condensed", serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  }
+.card_content {
+    padding:1rem;
+    text-align:center;
+}
+.img img {
+    max-width:45%;
+}
+.blur{
+  filter:blur(8px);
+}
+.nonblur{
+  filter:blur(0px);
+}
+.wrapper {
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    justify-content:center;
+}
+
+.card:hover{
+    cursor:pointer;
+    transform:translateY(-1.5%);
+}
+.card p {
+    color:white;
+    font-family: "Roboto Condensed", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+.price p{
+    font-weight:bold;
+   
+}
+
+.purchase_btn {
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: #f0f0f0; /* Light grey background */
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 0.2rem;
+    padding: 10px 12px;
+    text-align: center;
+    transition: all 200ms ease-in-out;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .purchase_btn:hover {
+    background-color: #4CAF50; 
+    color: white; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-2px); 
+  }
+  .remove:hover{
+    background-color:rgb(218, 39, 39) !important; 
+  }
+  .purchase_btn:focus {
+    outline: 2px solid #4CAF50; 
+    outline-offset: 2px;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6); 
+  }
+  
+  .purchase_btn:active {
+    background-color: #388E3C; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transform: translateY(0); /* Reset lift */
+  }
+  

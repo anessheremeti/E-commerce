@@ -1,0 +1,51 @@
+.form_content{
+  
+    flex-direction:column;
+    padding:0.7rem;
+}
+.close {
+    position:absolute;
+    top:8%;
+    right:5%;
+}
+.close:hover{
+    cursor:pointer;
+    opacity:0.6;
+}
+.form_content input {
+    margin:1.3px;
+    position:relative;
+    left:8%;
+    outline:none;
+
+}
+.form_content select{
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        justify-self: center;
+}
+.form_title{
+    text-align:center;
+}
+.total_price{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.total_price p{
+    font-weight:bold;
+}
+.btn{
+    display:flex;
+    justify-content:center;
+}
+.btn button {
+    background: #1B1F3B;
+    color: wheat;
+    padding: 0.5rem;
+    border:none;
+    /* padding: 2px 3px 2px 5px; */
+    border-radius:5px;
+}
