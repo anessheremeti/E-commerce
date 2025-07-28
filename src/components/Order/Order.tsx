@@ -13,12 +13,14 @@ const Order: React.FC = () => {
   }
 
   const item = useSelector((state: RootState) => state.item.items);
-  const quantity = useSelector((state: RootState) => state.item.quantity);
+  const filteredData = item.filter((item) => item.ProductId === item.ProductId)
+  let quantity = useSelector((state: RootState) => state.item.quantity);
   const isClicked = useSelector((state: RootState) => state.item.isClicked);
   const totalPrice = useSelector((state: RootState) => state.item.total);
 
   const [isCheckedOut, setIsCheckoutOut] = useState(false);
 
+  
   const onCheckoutHandler = () => {
     setIsCheckoutOut(!isCheckedOut);
   };
@@ -39,7 +41,7 @@ const Order: React.FC = () => {
                 />
                 <div className={classes.order_item}>
                   {item.map((item: Item, id: number) => {
-                    if (item.quantity > 0) {
+                    if (item.quantity > 0 ||   item != filteredData) {
                       return (
                         <ul key={id}>
                           <li>

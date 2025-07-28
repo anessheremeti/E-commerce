@@ -44,20 +44,59 @@
     border-radius:0.2rem;
 }
 .icons {
-
-    display: flex;
-    width: min(100%,3rem);
+display:flex;
 }
 .icons:hover {
     cursor:pointer;
 }
+.icons button{
+    max-height:3rem;
+  border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    margin: 0.2rem;
+    margin-top:1rem;
+    padding: 10px 12px;
+    text-align: center;
+    transition: all 200ms ease-in-out;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.icons button:hover{
+    cursor:pointer;
+     background-color: #F0F4FA;
+  color: #1E2F5C;
+  box-shadow: 0 4px 12px rgba(43, 58, 103, 0.2);
+}
+.icons button:focus{
+
+     transform: scale(0.98);
+}
+.icons button:active{
+    outline:none;
+}
 .total p {
-    position: absolute;
-    right: 1.4rem;
-    top: 1rem;
+        position: absolute;
+    top: 24%;
+    right: 2.1%;
+  
     transform: translate(50%, -50%);
     font-size: 0.8rem;
-    
+    text-align:center;
+    padding-top:1rem;
+    margin:0 auto;
     color: white;
     border-radius: 50%;
     width: 1.2rem;

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import DummyData from '../../components/ItemsData/DummyData';
 
 interface Item {
-  id: number;
+  ProductId: number;
   name: string;
   price: number;
   img: string;
@@ -19,8 +19,8 @@ interface ItemState {
 }
 
 const initialState: ItemState = {
-  items: DummyData, 
-  totalItems: DummyData.reduce((total, item) => total + item.quantity, 0), 
+  items: [], 
+  totalItems:  0,
   subtotal: 0,
   total: 0,
   quantity:0,
@@ -42,9 +42,9 @@ const ItemSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state, action) => {
+   addItem: (state, action) => {
      
-      const existingItem = state.items.find((item) => item.id === action.payload.id);
+      const existingItem = state.items.find((item) => item.ProductId === action.payload.ProductId);
       if (existingItem) {
         existingItem.quantity += 1;
         state.quantity += 1;
@@ -65,7 +65,7 @@ const ItemSlice = createSlice({
       state.isClicked = !state.isClicked;
     },
     removeItem: (state, action) => {
-        const index = state.items.findIndex(item => item.id === action.payload.id);
+        const index = state.items.findIndex(item => item.ProductId === action.payload.ProductId);
         if (index !== -1) {
           if (state.items[index].quantity >= 1) {
             state.items[index].quantity -= 1;

@@ -19,6 +19,7 @@
 }
 .img img {
     max-width:45%;
+    margin-bottom:1rem;
 }
 .blur{
   filter:blur(8px);

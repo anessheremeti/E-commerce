@@ -1,29 +1,38 @@
 import { addItem, removeItem } from '../../state/ItemSlice/ItemSlice';
-import DummyData from '../ItemsData/DummyData';
 import classes from './Item.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
-
+import { supabase } from "../../createClient.js";
+import {useEffect,useState} from 'react'
+import getProducts from '../hooks/getProducts.js'
 interface ItemProps {
   search: string;
 }
 
 const Item: React.FC<ItemProps> = ({ search }) => {
- 
+  const [data, setData] = useState<any[]>([]);
   const isClicked = useSelector((state: RootState) => state.item.isClicked); 
   const dispatch = useDispatch();
 
-  const filteredItems = DummyData.filter((item) =>
+  useEffect(() => {
+    const fetchData = async () => {
+      const products = await getProducts(); // PRET rezultatet
+      setData(products);                    // i ruan në state
+    };
+    fetchData();
+  }, []);
+
+  const filteredItems = data.filter((item: any) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className={`${classes.wrapper} ${isClicked ? classes.blur : classes.nonblur}`}>
       {filteredItems.map((item) => (
-        <div key={item.id} className={classes.card}>
+        <div key={item.ProductId} className={classes.card}>
           <div className={classes.card_content}>
             <div className={classes.img}>
-              <img src={item.img} alt={item.name} />
+              <img src={item.imageUrl} alt={item.name} />
             </div>
             <div className={classes.text}>
               <div className={classes.name}>
@@ -54,5 +63,4 @@ const Item: React.FC<ItemProps> = ({ search }) => {
     </div>
   );
 };
-
 export default Item;

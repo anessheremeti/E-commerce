@@ -12,13 +12,15 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@reduxjs/toolkit": "^2.5.0",
+    "@supabase/supabase-js": "^2.50.3",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.6.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
@@ -38,5 +40,13 @@
   "main": "eslint.config.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anessheremeti/E-commerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anessheremeti/E-commerce/issues"
+  },
+  "homepage": "https://github.com/anessheremeti/E-commerce#readme"
 }

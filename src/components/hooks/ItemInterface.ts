@@ -1,7 +1,7 @@
 interface ItemInterface {
-    id:number;
+    ProductId:number;
     name: string; 
     price: number; 
-    img:string;
+    imageUrl:string;
 }
 export default ItemInterface;

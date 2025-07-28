@@ -1,0 +1,81 @@
+.signupContainer {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 420px;
+  width: 90%;
+  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top:2rem;
+}
+
+.formTitle {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #2B3A67;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #2B3A67;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.formGroup input:focus {
+  border-color: #2B3A67;
+  box-shadow: 0 0 0 2px rgba(43, 58, 103, 0.2);
+}
+
+/* ==== Submit Button ==== */
+.buttonWhite {
+  background-color: #ffffff;
+  color: #2B3A67;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.buttonWhite:hover {
+  background-color: #f0f4fa;
+  color: #1e2f5c;
+  box-shadow: 0 4px 12px rgba(43, 58, 103, 0.2);
+}
+
+.buttonWhite:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+  .signupContainer {
+    padding: 1.5rem;
+  }
+}
