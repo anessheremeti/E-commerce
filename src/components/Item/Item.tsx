@@ -16,19 +16,20 @@ const Item: React.FC<ItemProps> = ({ search }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const products = await getProducts(); // PRET rezultatet
-      setData(products);                    // i ruan në state
+      const products = await getProducts(); 
+      console.log(products);
+      setData(products);                    
     };
     fetchData();
   }, []);
 
-  const filteredItems = data.filter((item: any) =>
+  const filteredItems = data?.filter((item: any) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className={`${classes.wrapper} ${isClicked ? classes.blur : classes.nonblur}`}>
-      {filteredItems.map((item) => (
+      {filteredItems?.map((item) => (
         <div key={item.ProductId} className={classes.card}>
           <div className={classes.card_content}>
             <div className={classes.img}>
@@ -59,7 +60,7 @@ const Item: React.FC<ItemProps> = ({ search }) => {
           </div>
         </div>
       ))}
-      {filteredItems.length === 0 && <p className={classes.no_results}>No items found.</p>}
+      {filteredItems?.length === 0 && <p className={classes.no_results}>No items found.</p>}
     </div>
   );
 };

@@ -1,10 +1,9 @@
-import React from "react";
+import {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../state/store";
 import classes from "./Order.module.css";
 import close from "../../assets/close.png";
 import { toggleClicked } from "../../state/ItemSlice/ItemSlice";
-import { useState } from "react";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 const Order: React.FC = () => {
   interface Item {
@@ -13,13 +12,13 @@ const Order: React.FC = () => {
   }
 
   const item = useSelector((state: RootState) => state.item.items);
-  const filteredData = item.filter((item) => item.ProductId === item.ProductId)
-  let quantity = useSelector((state: RootState) => state.item.quantity);
+  //const filteredData = item.filter((item) => item.ProductId === item.ProductId)
+  const quantity = useSelector((state: RootState) => state.item.quantity);
   const isClicked = useSelector((state: RootState) => state.item.isClicked);
   const totalPrice = useSelector((state: RootState) => state.item.total);
 
   const [isCheckedOut, setIsCheckoutOut] = useState(false);
-
+  0
   
   const onCheckoutHandler = () => {
     setIsCheckoutOut(!isCheckedOut);
@@ -41,7 +40,7 @@ const Order: React.FC = () => {
                 />
                 <div className={classes.order_item}>
                   {item.map((item: Item, id: number) => {
-                    if (item.quantity > 0 ||   item != filteredData) {
+                    if (item.quantity > 0 ) {
                       return (
                         <ul key={id}>
                           <li>

@@ -7,6 +7,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
+    id:'',
     user: '',
     email: '',
     password: ''
@@ -14,7 +15,10 @@ const SignUp = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const goBackHandler = () => {
+    console.log('heyyy')
+    navigate('/')
+  }
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser(prevData => ({
       ...prevData,
@@ -31,68 +35,79 @@ const SignUp = () => {
   };
 
   const onSubmitHandler = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage('');
+  e.preventDefault();
+  setErrorMessage('');
 
-    if (!isFormValid()) {
-      setErrorMessage("Të gjitha fushat janë të detyrueshme dhe password duhet të ketë së paku 6 karaktere.");
+  if (!isFormValid()) {
+    setErrorMessage("Të gjitha fushat janë të detyrueshme dhe password duhet të ketë së paku 6 karaktere.");
+    return;
+  }
+
+  setIsSubmitting(true);
+  document.body.style.cursor = 'wait';
+
+  try {
+    const { data: existingUser, error: checkError } = await supabase
+      .from('users')
+      .select('email')
+      .eq('email', user.email)
+      .single();
+
+    if (existingUser) {
+      setErrorMessage("Ky email është përdorur tashmë.");
       return;
     }
 
-    setIsSubmitting(true);
-    document.body.style.cursor = 'wait'; 
-
-    try {
-      const { data: existingUser, error: checkError } = await supabase
-        .from('users')
-        .select('email')
-        .eq('email', user.email)
-        .single();
-
-      if (existingUser) {
-        setErrorMessage("Ky email është përdorur tashmë.");
-        return;
-      }
-
-      if (checkError && checkError.code !== 'PGRST116') {
-        console.error('Gabim Supabase:', checkError.message);
-        setErrorMessage("Gabim gjatë kontrollimit të emailit.");
-        return;
-      }
-
-    const { error: insertError } = await supabase
-  .from('users')
-  .insert({
-    user: user.user,
-    email: user.email,
-    password: user.password,
-  });
-
-if (insertError) {
-  if (insertError.code === '23505') { 
-    setErrorMessage("Ky email është përdorur tashmë.");
-  } else {
-    console.error('Gabim Supabase:', insertError.message);
-    setErrorMessage("Gabim gjatë regjistrimit.");
-  }
-  return;
-}
-
-
-      localStorage.setItem('userName', user.user);
-      localStorage.setItem('isAuthenticated', 'true');
-      navigate('/');
-    } catch (err) {
-      console.error("Gabim i papritur:", err);
-      setErrorMessage("Diçka shkoi keq.");
-    } finally {
-      setIsSubmitting(false);
-      document.body.style.cursor = 'default'; 
+    if (checkError && checkError.code !== 'PGRST116') {
+      console.error('Gabim Supabase:', checkError.message);
+      setErrorMessage("Gabim gjatë kontrollimit të emailit.");
+      return;
     }
-  };
+
+    const { data: insertedUsers, error: insertError } = await supabase
+      .from('users')
+      .insert({
+        user: user.user,
+        email: user.email,
+        password: user.password,
+      })
+      .select(); 
+
+    if (insertError) {
+      console.error('Gabim gjatë regjistrimit:', insertError.message);
+      setErrorMessage("Gabim gjatë regjistrimit.");
+      return;
+    }
+
+    const insertedUser = insertedUsers?.[0];
+    if (!insertedUser?.id) {
+      throw new Error("ID mungon pas insertimit");
+    }
+    localStorage.setItem('userId', String(insertedUser.id));
+
+    localStorage.setItem('userName', insertedUser.user);
+    localStorage.setItem('isAuthenticated', 'true');
+
+    navigate('/');
+  } catch (err) {
+    console.error("Gabim i papritur:", err);
+    setErrorMessage("Diçka shkoi keq. Ju lutem provo përsëri.");
+  } finally {
+    setIsSubmitting(false);
+    document.body.style.cursor = 'default';
+  }
+};
+
 
   return (
+    <div>
+      <div onClick={goBackHandler}  className={classes.arrow}>
+<svg  style={{width:'4.2rem'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-0.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+</svg>
+      </div>
     <main className={classes.signupContainer} role="main">
+      
       <h1 className={classes.formTitle}>Create Account</h1>
       <form className={classes.signupForm} noValidate onSubmit={onSubmitHandler}>
         <div className={classes.formGroup}>
@@ -158,6 +173,7 @@ if (insertError) {
         </button>
       </form>
     </main>
+    </div>
   );
 };
 

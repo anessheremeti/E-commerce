@@ -7,13 +7,14 @@ import { toggleClicked } from '../../state/ItemSlice/ItemSlice';
 import Item from "../Item/Item";
 import Signup from '../SignUp/SignUp';
 import { supabase } from "../../createClient.js";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const quantity = useSelector((state: RootState) => state.item.quantity);
   const [signUp, setSignUp] = useState(false);
   const isClicked = useSelector((state: RootState) => state.item.isClicked);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
@@ -21,18 +22,22 @@ const Navbar: React.FC = () => {
   
   const onChangeHandler = () => {
     setSignUp(!signUp);
+     navigate('/signUp');
   };
 
   const handleLogout = async () => {
     localStorage.removeItem('userName');
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userId');
     const { error } = await supabase.auth.signOut()
-    localStorage.clear();
+   
     location.reload();
     
 
   };
-
+  const handleSignUp = () => {
+    navigate('/login');
+  }
   useEffect(() => {
     document.body.style.overflow = signUp ? 'hidden' : 'auto';
   }, [signUp]);
@@ -40,6 +45,7 @@ const Navbar: React.FC = () => {
   return (
     <div className={classes.container}>
       <div className={`${classes.content} ${quantity > 0 && isClicked ? classes.blur : classes.nonblur}`}>
+        
         <h4>Jersey Shop</h4>
 
         {!signUp && <div className={classes.search}>

@@ -7,16 +7,20 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
+    id:'',
     email: '',
     password: ''
   });
   let foundUser;
   const [loginStatus, setLoginStatus] = useState<string | null>(null);
-
+  const goBackHandler = () => {
+    console.log('heyyy')
+    navigate('/')
+  }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { data, error } = await supabase
+    const { data:insertedUser, error } = await supabase
       .from('users')
       .select('*')
       .eq('email', user.email.trim());
@@ -27,15 +31,16 @@ const Login: React.FC = () => {
       return;
     }
 
-    if (!data || data.length === 0) {
+    if (!insertedUser || insertedUser.length === 0) {
       setLoginStatus("No user found with this email.");
       return;
     }
 
-     foundUser = data[0];
+     foundUser = insertedUser[0];
 
     if (foundUser.password.trim() === user.password.trim()) {
       console.log('Login successful!');
+      localStorage.setItem('userId', foundUser.id);
       localStorage.setItem('userName', foundUser.user); 
       localStorage.setItem('isAuthenticated','true')
       navigate('/');
@@ -53,6 +58,12 @@ const Login: React.FC = () => {
   };
 
   return (
+    <div>
+      <div onClick={goBackHandler}  className={classes.arrow}>
+<svg  style={{width:'4.2rem'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-0.5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+</svg>
+      </div>
     <div className={classes.container}>
       <form className={classes.form} onSubmit={handleSubmit}>
         <h2>Welcome Back</h2>
@@ -88,6 +99,7 @@ const Login: React.FC = () => {
 
         {loginStatus && <p className={classes.status}>{loginStatus}</p>}
       </form>
+    </div>
     </div>
   );
 };
