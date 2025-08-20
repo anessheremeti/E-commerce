@@ -6,7 +6,6 @@ import Order from "../Order/Order";
 import { toggleClicked } from '../../state/ItemSlice/ItemSlice';
 import Item from "../Item/Item";
 import Signup from '../SignUp/SignUp';
-import { supabase } from "../../createClient.js";
 import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
@@ -29,15 +28,12 @@ const Navbar: React.FC = () => {
     localStorage.removeItem('userName');
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('userId');
-    const { error } = await supabase.auth.signOut()
    
     location.reload();
     
 
   };
-  const handleSignUp = () => {
-    navigate('/login');
-  }
+ 
   useEffect(() => {
     document.body.style.overflow = signUp ? 'hidden' : 'auto';
   }, [signUp]);

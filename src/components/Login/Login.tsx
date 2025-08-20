@@ -60,9 +60,22 @@ const Login: React.FC = () => {
   return (
     <div>
       <div onClick={goBackHandler}  className={classes.arrow}>
-<svg  style={{width:'4.2rem'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-0.5">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+<svg
+  style={{ width: '4.2rem' }}
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  strokeWidth={1.5}
+  stroke="currentColor"
+  className={classes.size05} 
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
+  />
 </svg>
+
       </div>
     <div className={classes.container}>
       <form className={classes.form} onSubmit={handleSubmit}>

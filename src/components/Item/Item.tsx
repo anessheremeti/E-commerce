@@ -2,7 +2,6 @@ import { addItem, removeItem } from '../../state/ItemSlice/ItemSlice';
 import classes from './Item.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
-import { supabase } from "../../createClient.js";
 import {useEffect,useState} from 'react'
 import getProducts from '../hooks/getProducts.js'
 interface ItemProps {
@@ -18,7 +17,7 @@ const Item: React.FC<ItemProps> = ({ search }) => {
     const fetchData = async () => {
       const products = await getProducts(); 
       console.log(products);
-      setData(products);                    
+     setData(products ?? [])                  
     };
     fetchData();
   }, []);
